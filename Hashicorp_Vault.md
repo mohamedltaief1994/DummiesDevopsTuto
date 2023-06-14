@@ -65,7 +65,7 @@ systemctl start vault
 systemctl enable vault
 ```
 
-## Configure Vault [link1](https://devopstales.github.io/kubernetes/k8s-vault-v2/)[link2](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-deploy)
+## Configure Vault [link1](https://devopstales.github.io/kubernetes/k8s-vault-v2/) | [link2](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-deploy)
 
 ```bash
 export VAULT_ADDR='http://127.0.0.1:8200'
