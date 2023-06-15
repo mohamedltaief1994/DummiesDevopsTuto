@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins-agent
+  name: jenkins-agent
+  namespace: deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-agent
+  template:
+    metadata:
+      labels:
+        app: jenkins-agent
+    spec:
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: "/var/run/docker.sock"
+              #            type: File
+      containers:
+      - image: local/jenkins-agent
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        name: jenkins-agent
+        env:
+          - name: JENKINS_AGENT_NAME
+            value: '$NAME'
+          - name: JENKINS_URL
+            value: '$URL'
+          - name: JENKINS_SECRET
+            value: '$SECRET'
+        volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: docker-sock
+            readOnly: false
